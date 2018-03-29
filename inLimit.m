@@ -17,6 +17,6 @@ for n=1:NumPop
 end
 
 teste = sum(Pop_ini);
-disp (teste);
+%disp (teste);
 end
 
