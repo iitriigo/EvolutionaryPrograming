@@ -1,8 +1,8 @@
-function [A] = Amatrix( input_args )
+function [A] = Amatrix(  )
 %AMATRIX Summary of this function goes here
 %   Detailed explanation goes here
 
-Lim_Line = [48, 59, 89, 94, 59, 74]
+
 Bar_ref = 4;
 
 %Input of line data 
@@ -37,7 +37,7 @@ for i = 1:length(LineData)
     end
 end 
 
-B_sum = sum(B)
+B_sum = sum(B);
 
 for i = 1:length(LineData)
 	for j = 1:length(LineData)
