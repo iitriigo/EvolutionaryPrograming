@@ -9,7 +9,7 @@ for n=1:NumPop
         Gerador(i,n)=Pmin(1,i)+rand*40;
         Pop_ini(i,n)= Gerador(i,n);
     end
-    Sigmaini(n) = rand;
+    Sigmaini(n) = 0;
 end
 
 %% Assure that production and load are igual

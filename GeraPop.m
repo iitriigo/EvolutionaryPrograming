@@ -6,7 +6,7 @@ NumGeradores = 4;
 
 for n=1:NumPop
     for i=1:NumGeradores
-        Gerador(i,n)=Pmin(1,i)+rand*40;
+        Gerador(i,n)=Pmin(1,i)+randn*40;
         Pop_ini(i,n)= Gerador(i,n);
     end
 end

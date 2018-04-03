@@ -13,7 +13,7 @@ for j = min:max
     totalGerado=0;
     for i=1:ger_n  
      % a=sigma*rand;
-      mutatedPOP(i,j) = clonePOP(i,j) + sigma*rand;
+      mutatedPOP(i,j) = clonePOP(i,j) + sigma*randn;
       totalGerado = totalGerado + mutatedPOP(i,j);
     end
     

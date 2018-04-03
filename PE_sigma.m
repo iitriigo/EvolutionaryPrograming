@@ -19,8 +19,8 @@ c=[0.1, 0.07, 0.2, 0.05];
 
 %Stuf we can change for the report_____________________________________
 P_load = 160;
-NumPOP = 10;
-tau = 1;
+NumPOP = 2;
+tau = 0.1;
 stop=0.001;
 
 %_______________________________________________________________________
@@ -49,18 +49,19 @@ matrixSigma = BestSigma;
 end 
  
 
+
 for i=1:1000
     %Clone matrix
     clonePOP=Clone(matrixPOP);
     cloneSigma = Clone(matrixSigma);
     
     %Mutate matrix
-    [mutPOP_ini, mutSigma_ini] = mutate_Sig(matrixPOP, clonePOP, matrixSigma, ...
+    [mutPOP, mutSigma] = mutate_Sig(matrixPOP, clonePOP, matrixSigma, ...
         cloneSigma, tau, P_load);
-    Cost_ini = costCalc(a,b,c,mutPOP_ini, Pmax, Pmin);
+    Cost = costCalc(a,b,c,mutPOP, Pmax, Pmin);
 
     [BestPOP, BestSigma, BestPrice] = ...
-        elitist_Sig(mutPOP_ini, mutSigma_ini, Cost_ini, NumPOP);
+        elitist_Sig(mutPOP, mutSigma, Cost, NumPOP);
     
     %Saving data for plotting
     Price_History(i) = BestPrice;

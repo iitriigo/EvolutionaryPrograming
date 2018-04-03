@@ -12,15 +12,11 @@ mutateSigma=cloneSigma;
 
 
 for j = min:max
-      mutateSigma(j) = tau*rand;
-end
-
-
-
-for j = min:max
     totalGerado=0;
+    mutateSigma(j) = mutateSigma(j) +tau*randn;
+    
     for i=1:ger_n 
-      mutatedPOP(i,j) = clonePOP(i,j) + mutateSigma(i)*rand;
+      mutatedPOP(i,j) = clonePOP(i,j) + mutateSigma(i)*randn;
       totalGerado = totalGerado + mutatedPOP(i,j);
     end
     
