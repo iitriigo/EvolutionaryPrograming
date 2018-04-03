@@ -1,7 +1,7 @@
 %***********************************************************************%
-%********************* State Estimation + Network **********************%
-%****************** Evolutionary Programing - Elitist ******************%
-%********************** Diogo Martins & Ines Trigo *********************%
+%************************* State Estimation ****************************%
+%*************** Evolutionary Programing - Determinist *****************%
+%******************* Diogo Martins & Ines Trigo ************************%
 %***********************************************************************%
 
 clc
@@ -17,13 +17,15 @@ a=[1100, 1200, 300, 650];
 b=[20,25, 10, 20];
 c=[0.1, 0.07, 0.2, 0.05];
 
+
 %Stuf we can change for the report_____________________________________
-NumPOP = 4;
+NumPOP = 5;
 simga = 1;
-stop=0.0001;
+stop=0.001;
 load_precent = 1.25; %changes from 0.75pu to 1.25
 Line_Lim_precent = 0.5; %changes from 0.5 to 1.2
 %_______________________________________________________________________
+
 %Network Data
 NumGenerator = length(Pmax);
 Bar = 5;
@@ -32,9 +34,10 @@ Pc = [50;100;0;0;50]*load_precent;
 P_load = sum(Pc);
 
 Line_lim_ini = [48; 59; 89; 94; 59; 74]/100;
-Line_Lim = Line_lim_ini*Line_Lim_precent*0.85;
+Line_Lim = Line_lim_ini * Line_Lim_precent*0.85;
 
 A = Amatrix
+
 
 %% Initial Population
 matrixPOP = GeraPop(Pmax, Pmin, NumPOP, P_load );
@@ -47,47 +50,37 @@ clonePOP=Clone(matrixPOP);
 
 % Mutate
 mutPOP_ini=mutate(matrixPOP, clonePOP, simga,P_load);
-Cost_ini = costCalc(a,b,c,mutPOP_ini, Pmax, Pmin);
-CostLine = LineInLimit(mutPOP_ini, Pc,A, Line_Lim, Cost_ini);
 
-%Choose the Best
-BestPOP = elitist(mutPOP_ini, CostLine, NumPOP);
+%Choose new individuals
+
+[ChosenPOP_ini, BestPrice_ini] = deterministic_A2(mutPOP_ini, NumPOP, a,...
+    b, c, Pmax, Pmin,Pc, A, Line_Lim);
 
 %newGen
-matrixPOP = BestPOP;
+matrixPOP = ChosenPOP_ini;
 end 
 
 
-for i=1:1000
+for i=1:3000
 
 % Clone matrix
 clonePOP=Clone(matrixPOP);
 
 % Mutate
 mutPOP_ini=mutate(matrixPOP, clonePOP, simga,P_load);
-Cost_ini = costCalc(a,b,c,mutPOP_ini, Pmax, Pmin);
-CostLine = LineInLimit(mutPOP_ini, Pc,A, Line_Lim, Cost_ini);
 
-%Choose the Best
-[BestPOP, BestPrice] = elitist(mutPOP_ini, CostLine, NumPOP);
 
+%Choose new individuals
+
+[ChosenPOP, BestPrice] = deterministic_A2(mutPOP_ini, NumPOP, a, b, ...
+	c, Pmax, Pmin, Pc, A, Line_Lim);
 
 %Saving data for plotting
  Price_History(i) = BestPrice;
- Production_G31_History(i) = BestPOP(1,1);
- Production_G32_History(i) = BestPOP(2,1);
- Production_G41_History(i) = BestPOP(3,1);
- Production_G42_History(i) = BestPOP(4,1);
- 
- [Cost_final, P_line] = LineInLimit(BestPOP, Pc, A, Line_Lim, CostLine);
- 
- Line12_History(i) = P_line(1,1)*100;
- Line15_History(i) = P_line(2,1)*100;
- Line23_History(i) = P_line(3,1)*100;
- Line24_History(i) = P_line(4,1)*100;
- Line34_History(i) = P_line(5,1)*100;
- Line45_History(i) = P_line(6,1)*100;
- 
+ Production_G31_History(i) = ChosenPOP(1,1);
+ Production_G32_History(i) = ChosenPOP(2,1);
+ Production_G41_History(i) = ChosenPOP(3,1);
+ Production_G42_History(i) = ChosenPOP(4,1);
 
 
 %Stoping criteria
@@ -101,13 +94,14 @@ if i>22
 
 end
  
+ 
 %newGen
-matrixPOP = BestPOP;
+matrixPOP = ChosenPOP;
 end 
 
 %% Results Display 
 fprintf('Best Solution\nP (MW) =\n');
-disp(BestPOP(:,1))
+disp(ChosenPOP(:,1))
 fprintf('Best Solution\nCost (Euro/MWh) = ');
 disp(BestPrice)
 fprintf('Number of iterations: ');
@@ -126,28 +120,14 @@ xlabel('Number of iterations')
 ylabel('Production (MW)')
 legend('G31','G32','G41','G42')
 
+
 figure(2)
 plot(Price_History);
 title('Evolution of BestPrice in the best individual')
 xlabel('Number of iterations')
 ylabel('Price (Euro/MWh)')
 
-figure(3)
-plot(Line12_History);
-hold on
-plot(Line15_History);
-hold on
-plot(Line23_History);
-hold on
-plot(Line24_History);
-hold on
-plot(Line34_History);
-hold on
-plot(Line45_History);
-title('Evolution of power flow in system lines')
-xlabel('Number of iterations')
-ylabel('PF (MW)')
-legend('L12','L15','L23','L24', 'L34', 'L45')
+
 
 
 

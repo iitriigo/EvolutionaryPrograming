@@ -1,4 +1,4 @@
-function [ CostLines ] = LineInLimit(POP, P_l, Amatrix, Line_Lim, Cost_ini)
+function [ CostLines, P_line ] = LineInLimit(POP, P_l, Amatrix, Line_Lim, Cost_ini)
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
 
