@@ -1,6 +1,7 @@
 function [ BestPOP,BestSigma ,BestPrice ] = elitist_Sig(POP, Sigma, Cost, NumPop)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+%ELITIST - Chooses the best elements
+%    This function orders the cost of each individual and chooses the ...
+%    best elements of the population 
 
 [Cost_order, index] = sort(Cost);
 

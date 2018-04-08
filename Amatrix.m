@@ -1,6 +1,5 @@
 function [A] = Amatrix(  )
-%AMATRIX Summary of this function goes here
-%   Detailed explanation goes here
+%AMATRIX Computes the A matrix
 
 
 Bar_ref = 4;

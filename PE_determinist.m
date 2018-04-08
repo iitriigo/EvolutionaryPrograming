@@ -26,15 +26,6 @@ stop=0.001;
 %_______________________________________________________________________
 
 NumGenerator = length(Pmax);
-Bar = 5;
-
-Pc = [50;100;0;0;50]*load_precent;
-P_load = sum(Pc);
-
-Line_lim_ini = [48; 59; 89; 94; 59; 74]/100;
-Line_Lim = Line_lim_ini * Line_Lim_precent*0.85;
-
-A = Amatrix
 
 %% Initial Population
 matrixPOP = GeraPop(Pmax, Pmin, NumPOP, P_load );

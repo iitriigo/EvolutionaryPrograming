@@ -1,6 +1,6 @@
 function [ price ] = costCalc( a, b, c, POP, Pmax, Pmin)
-%UNTITLED2 Summary of this function goes here
-%   Detailed explanation goes here
+%CostCalc - Computes the cost of each individual. If any generator is ...
+% operating outside its limits applies a penalization.
 
 [NumGeradores, NumPop] = size(POP);
 

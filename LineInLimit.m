@@ -1,9 +1,13 @@
-function [ CostLines, P_line ] = LineInLimit(POP, P_l, Amatrix, Line_Lim, Cost_ini)
-%UNTITLED4 Summary of this function goes here
-%   Detailed explanation goes here
+function [ CostLines, P_line ] = LineInLimit(POP, P_l, Amatrix, ...
+    Line_Lim, Cost_ini)
+
+% LineInLimit  - Checks if a line is operating inside its limits
+%   These function computes power flow for each system line using the ...
+%   A matrix and then checks if line limits are respected. If not, adds ...
+%   a penalization in the cost of the respective individual 
+
 
 % Variable initialization 
-
 M = 10000;
 NumberOfLines = 6;
 A =[Amatrix(:,1), Amatrix(:,2), Amatrix(:,3), [0;0;0;0;0;0], Amatrix(:,4)];
@@ -31,9 +35,9 @@ end
 
 for j=1:length(POP)
     for i = 1:NumberOfLines
-        if (abs(P_line(i,j)) > Line_Lim(i))
-            CostLines(j) = Cost_ini(j) + M*(abs(P_line(i,j) - Line_Lim(i)))^2;
-        end 
+       if (abs(P_line(i,j)) > Line_Lim(i))
+         CostLines(j) = Cost_ini(j) + M*(abs(P_line(i,j) - Line_Lim(i)))^2;
+       end 
     end 
 end 
 

@@ -1,7 +1,11 @@
 function [ ChosenPOP_order, BestPrice ] = deterministic_A2( POP, NumPop, a, b, ...
     c, Pmax, Pmin, P_l, Amatrix, Line_Lim)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+
+%Deterministic - Modelizes a stochastic tournament
+%   Randomly picks two vectors from the POP matrix. Randomly picks a number 
+%   between 0 and 1 (Prob) If this number is lower than 0.2 chooses the 
+%   vector that has a higher cost. Otherwise, if the number vector
+%   0.8 chooses the vector that has the lower cost.
 
 PopSize = length(POP);
 aux = zeros(1,PopSize);

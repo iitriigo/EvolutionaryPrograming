@@ -20,7 +20,7 @@ c=[0.1, 0.07, 0.2, 0.05];
 %Stuf we can change for the report_____________________________________
 P_load = 160;
 NumPOP = 2;
-tau = 0.1;
+tau = 0.5;
 stop=0.001;
 
 %_______________________________________________________________________
@@ -110,6 +110,7 @@ title('Evolution of prodruction in the best individual')
 xlabel('Number of iterations')
 ylabel('Production (MW)')
 legend('G31','G32','G41','G42')
+
 
 figure(2)
 plot(Sigma_History);

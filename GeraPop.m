@@ -1,18 +1,20 @@
 function [Popini] = GeraPop(Pmax, Pmin, NumPop,P_load)
-%UNTITLED2 Summary of this function goes here
-%   Detailed explanation goes here
+%GeraPOP - Creates the 1st population
+%   Generates the 1st population using the lower limit off production ...
+%   to which is added a random number 
 
-NumGeradores = 4;
+
+NumGenerators = 4;
 
 for n=1:NumPop
-    for i=1:NumGeradores
-        Gerador(i,n)=Pmin(1,i)+randn*40;
-        Pop_ini(i,n)= Gerador(i,n);
+    for i=1:NumGenerators
+        Generator(i,n)=Pmin(1,i)+randn*40;
+        Pop_ini(i,n)= Generator(i,n);
     end
 end
 
 %% Assure that production and load are igual
 
-Popini = inLimit(NumPop, NumGeradores, Pop_ini, P_load);
+Popini = inLimit(NumPop, NumGenerators, Pop_ini, P_load);
 
 

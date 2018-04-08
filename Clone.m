@@ -3,7 +3,7 @@ function [ clonePOP ] = Clone(matrixPOP)
 % matrixPOP into a new one clonePOP in the following way:
 % matrixPOP = 1 0 0        clonePOP = 1 0 0 1 0 0
 %             0 1 0                   0 1 0 0 1 0 
-%             1 0 0                   0 0 1 0 0 1
+%             1 0 0                   0 0 1 0 0 1 
 
 clonePOP = repmat(matrixPOP,1,2);
 
