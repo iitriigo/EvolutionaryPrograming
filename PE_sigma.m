@@ -1,5 +1,5 @@
 %***********************************************************************%
-%************************* State Estimation ****************************%
+%********************** State Estimation - A1 **************************%
 %****** Evolutionary Programing - Elitist + Autoadapting Sigma**********%
 %******************* Diogo Martins & Ines Trigo ************************%
 %***********************************************************************%
@@ -17,12 +17,11 @@ b=[20,25, 10, 20];
 c=[0.1, 0.07, 0.2, 0.05];
 
 
-%Stuf we can change for the report_____________________________________
+%Elements to change ____________________________________________________
 P_load = 160;
 NumPOP = 2;
 tau = 0.5;
 stop=0.001;
-
 %_______________________________________________________________________
 NumGenerator = length(Pmax);
 
@@ -74,7 +73,6 @@ for i=1:1000
 
 
     %Stoping criteria
-
     if i>22
         if ( abs(Price_History(i-21)-Price_History(i))<stop)
             if (abs(Price_History(i-20)-Price_History(i-1))<stop)
@@ -85,7 +83,7 @@ for i=1:1000
     end
     
     
-    %NewGEn
+    %New Generation
     matrixPOP = BestPOP;
     matrixSigma = BestSigma;
 end
